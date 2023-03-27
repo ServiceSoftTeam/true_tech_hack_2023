@@ -1,0 +1,45 @@
+.container {
+    width: 70%;
+    height: 80%;
+
+    color: white;
+}
+
+.base {
+    width: 100%;
+    height: auto;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.back {
+    width: 250px;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.back:hover {
+    color: rgb(185, 185, 190);
+}
+
+.text {
+    margin-left: 8px;
+}
+
+.head {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
