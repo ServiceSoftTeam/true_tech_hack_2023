@@ -30,6 +30,16 @@ class Yolo(object):
         
         '''
 
+        kekw = self.model.names
+        f = open("words.txt", 'r')
+        asd = f.readlines()
+        f.close()
+
+        for i in range(len(asd)):
+            kekw[i] = asd[i].replace('\n', '')
+
+        self.model.names = kekw
+    
         cap = cv.VideoCapture(video_path)
         (major_ver, minor_ver, subminor_ver) = (cv.__version__).split('.')
         if int(major_ver)  < 3 :
@@ -42,26 +52,32 @@ class Yolo(object):
             return None
 
         frame_counter = 0
-        objects = []
 
+        words = []
+        sec_c = 0
         while cap.isOpened():
             ret, frame = cap.read()
             if ret:
                 frame_counter += 1
-                if frame_counter % (2 * int(fps)) == 0:
+                if frame_counter % int(fps) == 0:
+                    sec_c += 1
+                if frame_counter % (seconds * int(fps)) == 0:
                     result = self.get_frame_objects(frame)
-                    objects.append(result)
+                    print(result)
+                    words.append({
+                        f'''{('0:' + str(sec_c)) if sec_c < 60 else str(sec_c // 60) + ':' + str(sec_c % 60)}''': f'''{str(result)[1:-1].replace(',', '') if result is not None else None}'''
+                    })
                 if cv.waitKey(1) & 0xFF == ord('q'):
                     break
 
             else:
                 break
-
+        
 
         cap.release()
         #out.release()
         cv.destroyAllWindows()
-        return objects
+        return words
 
 if __name__ == '__main__':
     print("Класс для детекции объектов на кадрах")
