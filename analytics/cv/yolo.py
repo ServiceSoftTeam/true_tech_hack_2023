@@ -55,6 +55,7 @@ class Yolo(object):
 
         words = []
         sec_c = 0
+        sec_temp = 0
         while cap.isOpened():
             ret, frame = cap.read()
             if ret:
@@ -64,8 +65,9 @@ class Yolo(object):
                 if frame_counter % (seconds * int(fps)) == 0:
                     result = self.get_frame_objects(frame)
                     words.append({
-                        f'''{('0:' + str(sec_c)) if sec_c < 60 else str(sec_c // 60) + ':' + str(sec_c % 60)}''': f'''{str(result)[1:-1].replace(',', '').replace("'", '') if result is not None else None}'''
+                        f'''{sec_temp+sec_c}:{sec_temp+sec_c+seconds+5}''': f'''{str(result)[1:-1].replace(',', '').replace("'", '') if result is not None else None}'''
                     })
+                    sec_temp = sec_c
                 if cv.waitKey(1) & 0xFF == ord('q'):
                     break
 

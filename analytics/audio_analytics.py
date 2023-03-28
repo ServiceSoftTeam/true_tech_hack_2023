@@ -41,7 +41,7 @@ def CreateAudio(data=dict()):
             GET_SPEECH(value)
             speech = AudioSegment.from_mp3('response.wav')
             temp = audio
-            url = audio + speech
+            temp = audio + speech
             audio = temp
             if len(audio) / 1000.0 < int(end):
                 audio = audio + AudioSegment.silent(duration=(int(end) - len(audio) / 1000.0) * 1000)
@@ -55,7 +55,10 @@ def SendRequerst():
     data = {
         'project-name': 'test.wav',
         'timeline': '10',
-        '0:4': 'Похоже, на сервисе произошла ошибка!'
+        '0:4': 'Похоже, на сервисе произошла ошибка!',
+        '4:8': 'Похоже, на сервисе произошла ошибка!',
+        '8:12': 'Похоже, на сервисе произошла ошибка!',
+        '12:16': 'Похоже, на сервисе произошла ошибка!',
     }
     ##########
     audio = CreateAudio(data)  # FIXME: сюда вместо data свой словарь

@@ -12,14 +12,14 @@ def GetGPTSentences(video_project:str='Test 1', video_path:str='Test 1.mov', sec
     
     _yolo = Yolo()
     words = _yolo.get_video_objects(video_path, seconds)
-    sentences = []
-    for i in words:
-        temp = list(i.items())[0]
-        sentences.append({
-            'project-name': video_project,
-            'timeline': seconds,
-            f'{temp[0]}': get_answer(temp[1])
-        })
+    sentences = {
+        'project-name': video_project,
+        'timeline': seconds,
+    }
+    if words is not None:
+        for i in words:
+            temp = list(i.items())[0]
+            sentences[temp[0]] = get_answer(temp[1])
     return sentences
 
 
