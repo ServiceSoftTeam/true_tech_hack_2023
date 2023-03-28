@@ -1,11 +1,12 @@
-from analytics.cv.yolo import Yolo
-from analytics.analytic_data_chatgpt import get_answer
+from cv.yolo import Yolo
+from analytic_data_chatgpt import get_answer
 
 def GetGPTSentences(video_project:str='Test 1', video_path:str='Test 1.mov', seconds:int = 5)-> list[dict]:
     
     '''
-
-
+    video_project - project name
+    video_path - путь к видео
+    seconds - timeline
     '''
     
     
