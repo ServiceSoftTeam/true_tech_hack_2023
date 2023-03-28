@@ -22,7 +22,7 @@ class Yolo(object):
         records = json.loads(results.pandas().xyxy[0].to_json(orient="records"))
         return [i['name'] for i in records if i['confidence'] >= .4]
     
-    def get_video_objects(self, video_path:str=None, seconds:int = 5) -> list[list]:
+    def get_video_objects(self, video_path:str=None, seconds:int = 5) -> list[dict]:
         
         '''
         Принимает путь к видео и находит объекты на кадре каждые seconds секунд
@@ -63,9 +63,8 @@ class Yolo(object):
                     sec_c += 1
                 if frame_counter % (seconds * int(fps)) == 0:
                     result = self.get_frame_objects(frame)
-                    print(result)
                     words.append({
-                        f'''{('0:' + str(sec_c)) if sec_c < 60 else str(sec_c // 60) + ':' + str(sec_c % 60)}''': f'''{str(result)[1:-1].replace(',', '') if result is not None else None}'''
+                        f'''{('0:' + str(sec_c)) if sec_c < 60 else str(sec_c // 60) + ':' + str(sec_c % 60)}''': f'''{str(result)[1:-1].replace(',', '').replace("'", '') if result is not None else None}'''
                     })
                 if cv.waitKey(1) & 0xFF == ord('q'):
                     break
