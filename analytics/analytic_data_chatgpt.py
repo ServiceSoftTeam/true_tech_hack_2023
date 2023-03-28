@@ -1,6 +1,7 @@
 import openai
+import io
 
-openai.api_key = "TOKEN"
+openai.api_key = "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"
 def get_answer(question):
     text_question = 'Придумай сцену из набора слов коротким предложением'
     text_question = text_question + question
@@ -15,6 +16,7 @@ def get_answer(question):
         presence_penalty=0,
         temperature=0.5,
     )
-    message = response["choices"][0]["text"].strip()
-    return message
+
+    message = io.StringIO(response["choices"][0]["text"])
+    return list(message.readlines())[2]
 
