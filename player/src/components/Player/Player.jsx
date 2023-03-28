@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './Player.module.scss';
 import ReactPlayer from 'react-player';
 import video from '../../assets/sample-30s.mp4';
 import Controls from './Controls/Controls';
 import { NavLink } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { middlewareGetPlayers } from '../../middleware/middleware';
 
 const Format = (seconds) => {
 	if (isNaN(seconds)) return '00:00:00';
@@ -27,6 +28,19 @@ const Player = () => {
 	const [isSeek, setSeek] = useState(false);
 	const [played, setPlayed] = useState(0);
 	const [duration, setDuration] = useState(0);
+
+	const linkGetPlayers = '';
+
+	useEffect(() => {
+		getPlayers();
+	}, []);
+
+	const getPlayers = () => {
+		middlewareGetPlayers(linkGetPlayers).then(({data, error}) => {
+			console.log(data);
+			console.log(error);
+		});
+	};
 
 	const openControls = () => {
 		setShowControls(true);
