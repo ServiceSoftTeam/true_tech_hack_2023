@@ -3,6 +3,4 @@ from .views import *
 
 urlpatterns = [
     path('save/', VideoApi.as_view()),
-#path('getall/', AudioAllApi.as_view()),
-#path('get/', AudioApi.as_view())
 ]
