@@ -1,8 +1,7 @@
-Solution "Analysing river pollutions" includes app, maps, detector directories, as well as app.py, config.py,
-Что не входит перечесляем
-All source files solution "Название проекта" are licensed under the Apache 2.0 license.
+Solution "True_tech_hack_2023" includes app, maps, detector directories, as well as app.py, config.py,
+All source files solution "True_tech_hack_2023" are licensed under the Apache 2.0 license.
 --------------------------------------------------------------------------------------------------------------
-Copyright 2021 Люди / Название команды
+Copyright 2021 SrvSft
 
 Licensed under the Apache License, Version 2.0(the "License");
 you may not use this file except in compliance with the License.

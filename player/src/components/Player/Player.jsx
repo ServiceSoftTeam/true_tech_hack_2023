@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import styles from './Player.module.scss';
 import ReactPlayer from 'react-player';
-import video from '../../assets/sample-30s.mp4';
+import ReactAudioPlayer from 'react-audio-player';
 import Controls from './Controls/Controls';
 import { NavLink } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import soundPlay from '../../assets/sample-12s.mp3';
+import video from '../../assets/sample-30s.mp4';
 
 const Format = (seconds) => {
 	if (isNaN(seconds)) return '00:00:00';
@@ -36,8 +38,13 @@ const Player = () => {
 		setShowControls(false);
 	};
 
-	const handlePlayPause = () => {
-		setPlaying(!isPlaying);
+	const handlePlayPause = (type) => {
+		if(type === 'play'){
+			setPlaying(true);
+		}
+		if(type === 'pause'){
+			setPlaying(false);
+		}
 	};
 
 	const handleVolumeChange = (e, value) => {
@@ -91,13 +98,23 @@ const Player = () => {
 
 	return (
 		<div className={styles.container}>
-			<NavLink className={styles.back} to="/">
+			<NavLink className={styles.back} to='/'>
 				<ArrowBackIcon />
 				<div className={styles.text}>Вернуться назад</div>
 			</NavLink>
 
 			<div onMouseEnter={openControls} onMouseLeave={closeControls} className={styles.base}>
-				<div className={styles.head}>Название ролика</div>
+				<div className={styles.head}>Побег из Шоушенка</div>
+
+				<ReactAudioPlayer
+					src={soundPlay}
+					// autoPlay
+					controls
+					// onClick={}
+					onPlay={(e) => handlePlayPause(e.type)}
+					onPause={(e) => handlePlayPause(e.type)}
+				/>
+
 				<ReactPlayer
 					width={'100%'}
 					height={'100%'}
@@ -122,7 +139,7 @@ const Player = () => {
 						elapsedTime={elapsedTime}
 						onRewind={handleRewind}
 						onFastForward={handleFastForward}
-						onPlayPause={handlePlayPause}
+						// onPlayPause={handlePlayPause}
 						onVolumeChange={handleVolumeChange}
 						onMute={handleMute}
 						onVolumeSeekDown={handleVolumeSeekDown}
