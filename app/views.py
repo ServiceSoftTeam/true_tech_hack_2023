@@ -15,9 +15,9 @@ class VideoApi(APIView):
         video_content = ContentFile(video.read())
         audio_new = Video.objects.create(
             project_name=project_name,
-            video=video,
+            video=video_content,
         )
-        kek = GetGPTSentences()
+        kek = GetGPTSentences(f'{video_content.name}.wav', f'{BASE_DIR}/video/{video_content.name},5)
         audio = CreateAudio(kek)
         audio_path = f"""{BASE_DIR}/media/{audio.name}"""
         with open(audio_path, 'wb+') as destination:
