@@ -1,7 +1,7 @@
 import openai
 import io
 
-openai.api_key = "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"
+openai.api_key = ""
 def get_answer(question):
     text_question = 'Придумай сцену из набора слов коротким предложением'
     text_question = text_question + question
